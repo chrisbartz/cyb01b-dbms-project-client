@@ -1,7 +1,7 @@
 {
-  "name": "react-slingshot",
+  "name": "cyb01b-dbms-project-client",
   "version": "7.0.1",
-  "description": "Starter kit for creating apps with React and Redux",
+  "description": "Web client for CS4610 using React and Redux and react-slingshot by Cory House",
   "engines": {
     "npm": ">=3"
   },
@@ -28,12 +28,13 @@
     "open:cover": "npm run test:cover && opn ./coverage/lcov-report/index.html",
     "analyze-bundle": "babel-node ./tools/analyzeBundle.js"
   },
-  "author": "Cory House",
+  "author": "Christopher Bartz",
   "license": "MIT",
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
     "object-assign": "4.1.0",
     "react": "16.2.0",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "16.2.0",
     "react-redux": "5.0.5",
     "react-router-dom": "4.2.2",

@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import * as types from './actionTypes';
 
 export function noAuthGet(url) {
   return fetch(url, {
@@ -34,4 +35,24 @@ export function noAuthDelete(url) {
     method: "DELETE"
   })
     .then((response) => response);
+}
+
+export function getTestDataFromApi() {
+  return function (dispatch) {
+    return noAuthGet('localhost:8080/hello')
+      .then((response) => {
+        console.log('hello!');
+        debugger;
+        dispatch(updatePageProps('testMessage', response));
+      });
+  };
+}
+
+export function updatePageProps(prop, value) {
+  return {
+    type: types.UPDATE_PAGE_PROPS,
+    pageProps: {
+      [prop]: value
+    }
+  };
 }

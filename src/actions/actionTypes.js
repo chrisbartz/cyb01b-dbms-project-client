@@ -1,0 +1,1 @@
+export const UPDATE_PAGE_PROPS = "UPDATE_PAGE_PROPS";
