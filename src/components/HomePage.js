@@ -15,16 +15,17 @@ class HomePage extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    this.componentWillMount = this.componentWillMount.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
-  componentWillMount() {
-    this.props.restCallActions.getTestDataFromApi;
+  componentDidMount() {
+    console.log('hello homepage');
+    this.props.restCallActions.getTestDataFromApi();
   }
 
   render() {
     // const activeStyle = { color: 'blue' };
-    debugger;
+    // debugger;
     return (
       <div>
         <h1>eCommerce Store - Partial Products???</h1>
@@ -40,8 +41,8 @@ class HomePage extends React.Component {
 }
 
 HomePage.propTypes = {
-  restCallActions: PropTypes.object,
-  pageProps: PropTypes.object
+  restCallActions: PropTypes.object.isRequired,
+  pageProps: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

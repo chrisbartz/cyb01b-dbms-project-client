@@ -5,7 +5,12 @@ export function noAuthGet(url) {
   return fetch(url, {
     method: "GET"
   })
-    .then((response) => response.json());
+    .then((response) => {
+      if(response.headers.get("content-type")) {
+        debugger;
+        return response.json();
+      }
+    });
 }
 
 export function noAuthPost(url, form) {
@@ -38,13 +43,18 @@ export function noAuthDelete(url) {
 }
 
 export function getTestDataFromApi() {
+  console.log('hello pre!');
   return function (dispatch) {
-    return noAuthGet('localhost:8080/hello')
+    return noAuthGet('http://192.168.1.98:8080/hello')
       .then((response) => {
-        console.log('hello!');
+        console.log('hello post!');
+        console.log(response);
         debugger;
-        dispatch(updatePageProps('testMessage', response));
-      });
+        return dispatch(updatePageProps('testMessage', response.responseText));
+      })
+      .catch((error) => {
+      console.log(error);
+    });
   };
 }
 

@@ -1,6 +1,6 @@
 export default {
   pageProps:{
-    testMessage: '',
+    testMessage: 'Default Message',
   },
   fuelSavings: {
     newMpg: '',
