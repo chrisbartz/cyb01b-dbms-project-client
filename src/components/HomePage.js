@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { /*Row, Col, */ Button } from 'react-bootstrap';
+import { /*Row, Col, */ Button, Alert, Modal } from 'react-bootstrap';
+import ToolBar from './ToolBar';
 
 import * as restCallActions from '../actions/restCallActions';
 
@@ -17,38 +18,56 @@ class HomePage extends React.Component {
     super(props, context);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.submitLogin = this.submitLogin.bind(this);
+    this.clearErrors = this.clearErrors.bind(this);
   }
 
   componentDidMount() {
     // console.log('hello homepage');
-    this.props.restCallActions.getTestDataFromApi();
+    // this.props.restCallActions.getTestDataFromApi();
   }
 
   submitLogin() {
     this.props.restCallActions.submitLogin('cyb01b');
   }
 
+  clearErrors() {
+    this.props.restCallActions.updatePageProps('errors', []);
+  }
+
   render() {
     // const activeStyle = { color: 'blue' };
-    // debugger;
-    console.log(this.props.pageProps.customer);
-    console.log(this.props.pageProps.addresses);
-    console.log(this.props.pageProps.pageProps);
+    //debugger;
+    // console.log(this.props.pageProps.customer);
+    // console.log(this.props.pageProps.addresses);
+    // console.log(this.props.pageProps.pageProps);
     return (
       <div>
-        {this.props.pageProps.customer != null && this.props.pageProps.customer.firstName != null && this.props.pageProps.customer.lastName != null ?
-          <h2>Hello, {this.props.pageProps.customer.firstName}</h2>
+        <ToolBar restCallActions={this.props.restCallActions} pageProps={this.props.pageProps} />
+
+        {this.props.pageProps.errors != null && this.props.pageProps.errors.length > 0 ?
+          <Alert bsStyle="danger" onDismiss={this.clearErrors}>
+            <h5>Errors in page:</h5>
+            <p>
+              {this.props.pageProps.errors.map((error, index) => {
+                return (
+                  <p key={index}>{index + " - " + error}</p>
+                );
+              })}
+            </p>
+            <p>
+              <Button onClick={this.clearErrors}>Hide Alert</Button>
+            </p>
+          </Alert>
+
           :
           ''
         }
-        <h1>eCommerce Store - Partial Products???</h1>
 
-        <h2>{this.props.pageProps != null && this.props.pageProps.testMessage.length > 0 ? this.props.pageProps.testMessage : 'Get Started'}</h2>
-        <ol>
-          <li>Review the <Link to="/fuel-savings">demo app</Link></li>
-          <li>Remove the demo and start coding: npm run remove-demo</li>
-        </ol>
-        <Button onClick={this.submitLogin}>Login</Button>
+
+        // page content
+
+        <Button className="btn btn-primary" onClick={this.submitLogin}>Login</Button>
+        // Login modal down here
       </div>
     );
   }

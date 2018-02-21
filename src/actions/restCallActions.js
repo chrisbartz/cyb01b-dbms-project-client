@@ -73,9 +73,10 @@ export function submitLogin(userId) {
   return function (dispatch) {
     return noAuthPost(apiUrl + 'login', userObject)
       .then((response) => {
-        debugger;
+        // debugger;
         dispatch(updatePageProps('customer', response.customer));
         dispatch(updatePageProps('addresses', response.customer.addresses));
+        dispatch(updatePageProps('errors', response.pageData.errors));
         return dispatch(updatePageProps('pageContent', response.pageData));
       })
       .catch((error) => {
