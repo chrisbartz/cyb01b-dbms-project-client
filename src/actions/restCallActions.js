@@ -85,6 +85,15 @@ export function submitLogin(userId) {
   };
 }
 
+export function submitLogout() {
+  return function (dispatch) {
+    dispatch(updatePageProps('customer', {}));
+    dispatch(updatePageProps('addresses', []));
+    dispatch(updatePageProps('errors', {}));
+    return dispatch(updatePageProps('pageContent', {}));
+  };
+}
+
 export function getLandingPageData() {
   return function (dispatch) {
     return noAuthGet(apiUrl + 'hello')

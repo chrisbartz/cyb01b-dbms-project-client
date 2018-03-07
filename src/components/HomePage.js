@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { /*Row, Col, */ Button, Alert, Modal } from 'react-bootstrap';
+import { /*Row, Col, */ Button, Alert/*, Modal*/ } from 'react-bootstrap';
 import ToolBar from './ToolBar';
 
 import * as restCallActions from '../actions/restCallActions';
+import SingleActionModal from "./SingleActionModal";
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
@@ -36,7 +37,7 @@ class HomePage extends React.Component {
 
   render() {
     // const activeStyle = { color: 'blue' };
-    //debugger;
+    // debugger;
     // console.log(this.props.pageProps.customer);
     // console.log(this.props.pageProps.addresses);
     // console.log(this.props.pageProps.pageProps);
@@ -44,7 +45,7 @@ class HomePage extends React.Component {
       <div>
         <ToolBar restCallActions={this.props.restCallActions} pageProps={this.props.pageProps} />
 
-        {this.props.pageProps.errors != null && this.props.pageProps.errors.length > 0 ?
+        {false && this.props.pageProps.errors != null && this.props.pageProps.errors.length > 0 ?
           <Alert bsStyle="danger" onDismiss={this.clearErrors}>
             <h5>Errors in page:</h5>
             <p>
@@ -67,7 +68,17 @@ class HomePage extends React.Component {
         // page content
 
         <Button className="btn btn-primary" onClick={this.submitLogin}>Login</Button>
-        // Login modal down here
+
+        <SingleActionModal
+          showModal={true /*this.props.pageProps.customer.userName==null*/}
+          showCancelButton={false}
+          title={"Login to " + this.props.pageProps.siteName}
+          bodyText="Please log in"
+          confirmAction={this.submitLogin()}
+          confirmText="Log me in"
+          cancelAction={this.props.restCallActions.submitLogout}
+        />
+
       </div>
     );
   }

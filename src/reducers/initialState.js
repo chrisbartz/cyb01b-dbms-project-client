@@ -1,12 +1,12 @@
 export default {
 
   pageProps:{
-    testMessage: 'Default Message',
+    siteName: 'ORCA eCommerce',
     customer: {},
     addresses: [],
     pageContent: {},
     errors: [],
-    username: '',
-    password: ''
+    inputusername: 'cyb01b',
+    inputpassword: ''
   }
 };

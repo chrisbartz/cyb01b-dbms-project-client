@@ -8,9 +8,9 @@ const ToolBar = (props) => {
   // debugger;
   return (
     <div>
-      <Navbar inverse>
+      <Navbar className="navbar-inverse">
         <Navbar.Brand>
-          ORCA eCommerce
+          {props.pageProps.siteName}
         </Navbar.Brand>
         <Nav>
           <NavItem eventKey={1}>Home</NavItem>
