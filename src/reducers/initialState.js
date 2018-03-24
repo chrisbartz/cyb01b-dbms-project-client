@@ -6,7 +6,8 @@ export default {
     addresses: [],
     pageContent: {},
     errors: [],
-    inputusername: 'cyb01b',
+    loginErrors: [],
+    inputusername: '',
     inputpassword: ''
   }
 };

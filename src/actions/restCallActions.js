@@ -60,27 +60,37 @@ export function getTestDataFromApi() {
         // debugger;
         return dispatch(updatePageProps('testMessage', response.responseText));
       })
-      .catch((error) => {
-      console.log(error);
+      .catch((/*error*/) => {
+      // console.log(error);
     });
   };
 }
 
 export function submitLogin(userId) {
+  if (userId == undefined || userId.length < 1)
+    return;
+
   let userObject = {
     userName: userId
   };
+
   return function (dispatch) {
     return noAuthPost(apiUrl + 'login', userObject)
       .then((response) => {
-        // debugger;
+        debugger;
+        if (response.errors != null)
+          return dispatch(updatePageProps('loginErrors', response.errors));
+
         dispatch(updatePageProps('customer', response.customer));
         dispatch(updatePageProps('addresses', response.customer.addresses));
         dispatch(updatePageProps('errors', response.pageData.errors));
+        dispatch(updatePageProps('loginErrors', []));
+        dispatch(updatePageProps('inputusername', ''));
+        dispatch(updatePageProps('inputpassword', ''));
         return dispatch(updatePageProps('pageContent', response.pageData));
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((/*error*/) => {
+        // console.log(error);
       });
   };
 }
@@ -90,6 +100,9 @@ export function submitLogout() {
     dispatch(updatePageProps('customer', {}));
     dispatch(updatePageProps('addresses', []));
     dispatch(updatePageProps('errors', {}));
+    dispatch(updatePageProps('loginErrors', []));
+    dispatch(updatePageProps('inputusername', ''));
+    dispatch(updatePageProps('inputpassword', ''));
     return dispatch(updatePageProps('pageContent', {}));
   };
 }
@@ -100,8 +113,8 @@ export function getLandingPageData() {
       .then((response) => {
         return dispatch(updatePageProps('landingPage', response.landingPageData));
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((/*error*/) => {
+        // console.log(error);
       });
   };
 }

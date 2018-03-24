@@ -27,8 +27,8 @@ class HomePage extends React.Component {
     // this.props.restCallActions.getTestDataFromApi();
   }
 
-  submitLogin() {
-    this.props.restCallActions.submitLogin('cyb01b');
+  submitLogin(userId) {
+    this.props.restCallActions.submitLogin(userId);
   }
 
   clearErrors() {
@@ -67,16 +67,20 @@ class HomePage extends React.Component {
 
         // page content
 
-        <Button className="btn btn-primary" onClick={this.submitLogin}>Login</Button>
+
 
         <SingleActionModal
-          showModal={true /*this.props.pageProps.customer.userName==null*/}
+          showModal={this.props.pageProps.customer.userName==null}
           showCancelButton={false}
           title={"Login to " + this.props.pageProps.siteName}
           bodyText="Please log in"
-          confirmAction={this.submitLogin()}
-          confirmText="Log me in"
+          confirmAction={() => this.submitLogin(this.props.pageProps.inputusername, this.props.pageProps.inputpassword)}
+          confirmText="Log in"
           cancelAction={this.props.restCallActions.submitLogout}
+          userField={this.props.pageProps.inputusername}
+          passField={this.props.pageProps.inputpassword}
+          restCallActions={this.props.restCallActions}
+          pageProps={this.props.pageProps}
         />
 
       </div>
