@@ -1,13 +1,14 @@
 export default {
 
   pageProps:{
-    siteName: 'ORCA eCommerce',
+    siteName: 'No Frills eCommerce',
     customer: {},
     addresses: [],
     pageContent: {},
     errors: [],
     loginErrors: [],
-    inputusername: '',
-    inputpassword: ''
+    inputUsername: 'cyb01b',
+    inputPassword: '',
+    inputSearch: ''
   }
 };

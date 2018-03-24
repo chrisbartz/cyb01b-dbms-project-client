@@ -77,7 +77,7 @@ export function submitLogin(userId) {
   return function (dispatch) {
     return noAuthPost(apiUrl + 'login', userObject)
       .then((response) => {
-        debugger;
+        // debugger;
         if (response.errors != null)
           return dispatch(updatePageProps('loginErrors', response.errors));
 
@@ -85,8 +85,8 @@ export function submitLogin(userId) {
         dispatch(updatePageProps('addresses', response.customer.addresses));
         dispatch(updatePageProps('errors', response.pageData.errors));
         dispatch(updatePageProps('loginErrors', []));
-        dispatch(updatePageProps('inputusername', ''));
-        dispatch(updatePageProps('inputpassword', ''));
+        dispatch(updatePageProps('inputUsername', ''));
+        dispatch(updatePageProps('inputPassword', ''));
         return dispatch(updatePageProps('pageContent', response.pageData));
       })
       .catch((/*error*/) => {
@@ -101,8 +101,8 @@ export function submitLogout() {
     dispatch(updatePageProps('addresses', []));
     dispatch(updatePageProps('errors', {}));
     dispatch(updatePageProps('loginErrors', []));
-    dispatch(updatePageProps('inputusername', ''));
-    dispatch(updatePageProps('inputpassword', ''));
+    dispatch(updatePageProps('inputUsername', ''));
+    dispatch(updatePageProps('inputPassword', ''));
     return dispatch(updatePageProps('pageContent', {}));
   };
 }
