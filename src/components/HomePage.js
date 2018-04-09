@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { /*Row, Col, */ Button, Alert/*, Modal*/ } from 'react-bootstrap';
 import ToolBar from './ToolBar';
 
 import * as restCallActions from '../actions/restCallActions';
 import LoginModal from "./LoginModal";
+import HomePageItems from "./HomePageItems";
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
@@ -43,12 +43,12 @@ class HomePage extends React.Component {
     // console.log(this.props.pageProps.pageProps);
     return (
       <div>
-        <ToolBar restCallActions={this.props.restCallActions} pageProps={this.props.pageProps} />
+        <ToolBar className='set-width' restCallActions={this.props.restCallActions} pageProps={this.props.pageProps} />
 
-
-        // page content
-
-
+        <HomePageItems
+        restCallActions={this.props.restCallActions}
+        pageProps={this.props.pageProps}
+        />
 
         <LoginModal
           showModal={this.props.pageProps.customer.userName==null}

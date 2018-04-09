@@ -32,10 +32,19 @@ input.small { width: 46px; }
 td.fuel-savings-label { width: 175px; }
 
 .navbar-top {
+  min-width: 800px;
   width: 875px
 }
 
 .error-text {
   color: red;
   font-weight: bold;
+}
+
+.right-justfy {
+  text-align: right;
+}
+
+.set-width {
+  width: 100%;
 }

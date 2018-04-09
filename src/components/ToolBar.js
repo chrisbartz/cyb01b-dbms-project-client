@@ -7,7 +7,7 @@ const ToolBar = (props) => {
   // debugger;
   return (
     <Row>
-      <Navbar className="navbar navbar-inverse navbar-top">
+      <Navbar className="navbar navbar-inverse">
         <Row>
           <Navbar.Header>
             <Navbar.Brand>
@@ -18,7 +18,7 @@ const ToolBar = (props) => {
         <Row>
           <Nav>
             <NavItem eventKey={1}>Home</NavItem>
-            <NavItem eventKey={2}>Catch of the Day</NavItem>
+            <NavItem eventKey={2}>Deal of the Day</NavItem>
             <Navbar.Form pullLeft>
               <FormGroup>
                 <FormControl
