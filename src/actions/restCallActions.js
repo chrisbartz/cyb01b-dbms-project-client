@@ -127,3 +127,26 @@ export function updatePageProps(prop, value) {
     }
   };
 }
+
+export function submitSearch(searchTerm, userId) {
+
+  if (searchTerm === undefined || searchTerm.length < 3)
+    return updatePageProps('errors', ['The search term must be > 3 characters']);
+
+  let query = '?searchTerm=' + searchTerm + "&userName=" + userId;
+
+  return function (dispatch) {
+    return noAuthGet(apiUrl + 'search' + query)
+      .then((response) => {
+        // debugger;
+        // if (response.errors != null)
+        //   return dispatch(updatePageProps('loginErrors', response.errors));
+
+        dispatch(updatePageProps('errors', response.pageData.errors));
+        return dispatch(updatePageProps('pageContent', response.pageData));
+      })
+      .catch((/*error*/) => {
+        // console.log(error);
+      });
+  };
+}

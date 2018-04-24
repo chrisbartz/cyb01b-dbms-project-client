@@ -6,6 +6,12 @@ const HomePageItems = (props) => {
   // debugger;
   return (
     <div>
+      {props.pageProps.inputSearch !== undefined && props.pageProps.inputSearch.length > 0 ?
+      <h3>{props.pageProps.inputSearch}</h3>
+        :
+        null
+      }
+
       {props.pageProps.pageContent !== undefined
       && props.pageProps.pageContent.items !== undefined
       && props.pageProps.pageContent.items.length > 0 ?

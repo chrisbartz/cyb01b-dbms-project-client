@@ -29,7 +29,7 @@ const ToolBar = (props) => {
                 />
               </FormGroup>
               {' '}
-              <Button >Search</Button>
+              <Button type='submit' onClick={() => props.restCallActions.submitSearch(props.pageProps.inputSearch)}>Search</Button>
             </Navbar.Form>
             <NavItem eventKey={7}>Cart</NavItem>
             <NavDropdown eventKey={8} title="My Account" id="basic-nav-dropdown">
