@@ -32,7 +32,7 @@ const HomePageItem = (props) => {
               )}</h3>
             </Row>
             <Row>
-              <Button className="right-justfy" onClick={() => props.restCallActions.addToCart(props.pageProps.cart, props.item.itemId, props.item.cost)}>Add to Cart</Button>
+              <Button className="right-justfy" onClick={() => props.restCallActions.addToCart(props.pageProps.cart, props.item.itemId, props.item.name, props.item.cost)}>Add to Cart</Button>
             </Row>
           </Panel.Body>
         </Panel>
@@ -46,7 +46,8 @@ const HomePageItem = (props) => {
 
 HomePageItem.propTypes = {
   restCallActions: PropTypes.object.isRequired,
-  item: PropTypes.object.isRequired
+  item: PropTypes.object.isRequired,
+  pageProps: PropTypes.object.isRequired
 };
 
 export default HomePageItem;

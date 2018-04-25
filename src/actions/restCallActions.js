@@ -164,8 +164,8 @@ export function submitSearch(searchTerm, userId) {
   };
 }
 
-export function addToCart(cart, itemId, itemCost) {
-  debugger;
+export function addToCart(cart, itemId, itemName, itemCost) {
+  // debugger;
 
   if (cart === undefined)
     return updatePageProps('errors', ['The cart is invalid']);
@@ -176,11 +176,13 @@ export function addToCart(cart, itemId, itemCost) {
   if (itemCost === undefined || itemCost < 0)
     return updatePageProps('errors', ['The item cost must be valid to add it to the cart']);
 
+  let newCart = JSON.parse(JSON.stringify(cart));
+
   let itemFound = false;
 
-  for (let i = 0; i < cart.length; i++) {
-    if (cart[i].itemId === itemId) {
-      cart[i].qty = cart[i].qty + 1;
+  for (let i = 0; i < newCart.length; i++) {
+    if (newCart[i].itemId === itemId) {
+      newCart[i].qty = newCart[i].qty + 1;
       itemFound = true;
       break;
     }
@@ -189,14 +191,28 @@ export function addToCart(cart, itemId, itemCost) {
   if (!itemFound) {
     let newItem = {
       itemId: itemId,
+      name: itemName,
       qty: 1,
       cost: itemCost
     };
 
-    cart.push(newItem);
+    newCart.push(newItem);
+  }
+
+  let itemsCount = 0;
+  let totalCost = 0;
+
+  for (let i = 0; i < newCart.length; i++) {
+    if (newCart[i].qty > 0 && newCart[i].cost >= 0) {
+      itemsCount += newCart[i].qty;
+      totalCost += newCart[i].qty * newCart[i].cost;
+    }
   }
 
   return function (dispatch) {
-    return dispatch(updatePageProps('cart', cart));
+    dispatch(updatePageProps('cartTotal', totalCost));
+    dispatch(updatePageProps('cartItems', itemsCount));
+    return dispatch(updatePageProps('cart', newCart));
   };
 }
+

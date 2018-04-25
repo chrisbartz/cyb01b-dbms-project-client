@@ -12,6 +12,7 @@ export default function pagePropsReducer(state = initialState.pageProps, action)
 
   switch (action.type) {
     case types.UPDATE_PAGE_PROPS:
+      // debugger;
       return objectAssign({}, state, action.pageProps);
 
     default:

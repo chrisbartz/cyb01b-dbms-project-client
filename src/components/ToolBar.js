@@ -31,7 +31,7 @@ const ToolBar = (props) => {
               {' '}
               <Button type="submit" onClick={() => props.restCallActions.submitSearch(props.pageProps.inputSearch)}>Search</Button>
             </Navbar.Form>
-            <NavItem eventKey={7}>Cart</NavItem>
+            <NavItem eventKey={7} onClick={() => props.restCallActions.updatePageProps('showCart', true)}>Cart</NavItem>
             <NavDropdown eventKey={8} title="My Account" id="basic-nav-dropdown">
               <MenuItem eventKey={8.1}>{
                 props.pageProps.customer != null

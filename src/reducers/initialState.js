@@ -10,6 +10,9 @@ export default {
     inputUsername: 'cyb01b',
     inputPassword: '',
     inputSearch: '',
-    cart: []
+    cart: [],
+    showCart: false,
+    cartTotal: 0,
+    cartItems: 0
   }
 };

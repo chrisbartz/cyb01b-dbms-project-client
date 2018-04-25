@@ -7,6 +7,7 @@ import ToolBar from './ToolBar';
 
 import * as restCallActions from '../actions/restCallActions';
 import LoginModal from "./LoginModal";
+import CartModal from "./CartModal";
 import HomePageItems from "./HomePageItems";
 
 // This is a class-based component because the current
@@ -58,6 +59,18 @@ class HomePage extends React.Component {
           confirmAction={() => this.submitLogin(this.props.pageProps.inputUsername, this.props.pageProps.inputPassword)}
           confirmText="Log in"
           cancelAction={this.props.restCallActions.submitLogout}
+          restCallActions={this.props.restCallActions}
+          pageProps={this.props.pageProps}
+        />
+
+        <CartModal
+          showModal={this.props.pageProps.showCart}
+          showCancelButton={true}
+          title={this.props.pageProps.siteName + ": Shopping Cart and Checkout"}
+          confirmAction={() => this.props.restCallActions.completeCheckout(this.props.pageProps.cart, this.props.pageProps.userName)}
+          confirmText="Create Order"
+          cancelText="Cancel"
+          cancelAction={() => this.props.restCallActions.updatePageProps('showCart', false)}
           restCallActions={this.props.restCallActions}
           pageProps={this.props.pageProps}
         />
