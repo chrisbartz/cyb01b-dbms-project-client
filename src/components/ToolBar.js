@@ -17,7 +17,7 @@ const ToolBar = (props) => {
         </Row>
         <Row>
           <Nav>
-            <NavItem eventKey={1}>Home</NavItem>
+            <NavItem eventKey={1} onClick={() => props.restCallActions.getHomepageData(props.pageProps.customer.userName)}>Home</NavItem>
             <NavItem eventKey={2}>Deal of the Day</NavItem>
             <Navbar.Form pullLeft>
               <FormGroup>
@@ -29,7 +29,7 @@ const ToolBar = (props) => {
                 />
               </FormGroup>
               {' '}
-              <Button type='submit' onClick={() => props.restCallActions.submitSearch(props.pageProps.inputSearch)}>Search</Button>
+              <Button type="submit" onClick={() => props.restCallActions.submitSearch(props.pageProps.inputSearch)}>Search</Button>
             </Navbar.Form>
             <NavItem eventKey={7}>Cart</NavItem>
             <NavDropdown eventKey={8} title="My Account" id="basic-nav-dropdown">

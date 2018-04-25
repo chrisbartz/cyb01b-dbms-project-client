@@ -9,6 +9,7 @@ export default {
     loginErrors: [],
     inputUsername: 'cyb01b',
     inputPassword: '',
-    inputSearch: ''
+    inputSearch: '',
+    cart: []
   }
 };

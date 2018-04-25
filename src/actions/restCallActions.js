@@ -87,6 +87,7 @@ export function submitLogin(userId) {
         dispatch(updatePageProps('loginErrors', []));
         dispatch(updatePageProps('inputUsername', ''));
         dispatch(updatePageProps('inputPassword', ''));
+        dispatch(updatePageProps('inputSearch', ''));
         return dispatch(updatePageProps('pageContent', response.pageData));
       })
       .catch((/*error*/) => {
@@ -103,15 +104,27 @@ export function submitLogout() {
     dispatch(updatePageProps('loginErrors', []));
     dispatch(updatePageProps('inputUsername', ''));
     dispatch(updatePageProps('inputPassword', ''));
+    dispatch(updatePageProps('inputSearch', ''));
     return dispatch(updatePageProps('pageContent', {}));
   };
 }
 
-export function getLandingPageData() {
+export function getHomepageData(userId) {
   return function (dispatch) {
-    return noAuthGet(apiUrl + 'hello')
+    return noAuthGet(apiUrl + 'homepage' + "?userName=" + userId)
       .then((response) => {
-        return dispatch(updatePageProps('landingPage', response.landingPageData));
+        // debugger;
+        if (response.errors != null)
+          return dispatch(updatePageProps('loginErrors', response.errors));
+
+        dispatch(updatePageProps('customer', response.customer));
+        dispatch(updatePageProps('addresses', response.customer.addresses));
+        dispatch(updatePageProps('errors', response.pageData.errors));
+        dispatch(updatePageProps('loginErrors', []));
+        dispatch(updatePageProps('inputUsername', ''));
+        dispatch(updatePageProps('inputPassword', ''));
+        dispatch(updatePageProps('inputSearch', ''));
+        return dispatch(updatePageProps('pageContent', response.pageData));
       })
       .catch((/*error*/) => {
         // console.log(error);
@@ -148,5 +161,42 @@ export function submitSearch(searchTerm, userId) {
       .catch((/*error*/) => {
         // console.log(error);
       });
+  };
+}
+
+export function addToCart(cart, itemId, itemCost) {
+  debugger;
+
+  if (cart === undefined)
+    return updatePageProps('errors', ['The cart is invalid']);
+
+  if (itemId === undefined || itemId < 0)
+    return updatePageProps('errors', ['The item id must be valid to add it to the cart']);
+
+  if (itemCost === undefined || itemCost < 0)
+    return updatePageProps('errors', ['The item cost must be valid to add it to the cart']);
+
+  let itemFound = false;
+
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].itemId === itemId) {
+      cart[i].qty = cart[i].qty + 1;
+      itemFound = true;
+      break;
+    }
+  }
+
+  if (!itemFound) {
+    let newItem = {
+      itemId: itemId,
+      qty: 1,
+      cost: itemCost
+    };
+
+    cart.push(newItem);
+  }
+
+  return function (dispatch) {
+    return dispatch(updatePageProps('cart', cart));
   };
 }

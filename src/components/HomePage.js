@@ -43,7 +43,7 @@ class HomePage extends React.Component {
     // console.log(this.props.pageProps.pageProps);
     return (
       <div>
-        <ToolBar className='set-width' restCallActions={this.props.restCallActions} pageProps={this.props.pageProps} />
+        <ToolBar className="set-width" restCallActions={this.props.restCallActions} pageProps={this.props.pageProps} />
 
         <HomePageItems
         restCallActions={this.props.restCallActions}
