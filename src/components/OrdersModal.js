@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const OrdersModal = (props) => {
   // debugger;
   return (
-    <Modal show={props.showModal} onHide={props.cancelAction}>
+    <Modal show={props.showModal} onHide={props.confirmAction}>
       <Modal.Header closeButton>
         <Modal.Title>{props.title}</Modal.Title>
       </Modal.Header>
@@ -43,9 +43,9 @@ const OrdersModal = (props) => {
           props.pageProps.orders.length > 0 ?
             props.pageProps.orders.map((order, index) => {
               return (
-                <Panel>
+                <Panel key={index}>
                   <Panel.Body>
-                    <div key={index}>
+                    <div>
                       <h4>
                         <Row>
                           <Col xs={4}>

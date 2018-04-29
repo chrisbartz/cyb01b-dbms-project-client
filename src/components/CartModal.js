@@ -97,7 +97,9 @@ LoginModal.propTypes = {
   userField: PropTypes.string,
   restCallActions: PropTypes.object.isRequired,
   passField: PropTypes.string,
-  pageProps: PropTypes.object.isRequired
+  pageProps: PropTypes.object.isRequired,
+  clearAction: PropTypes.function,
+  clearText: PropTypes.object
 };
 
 export default LoginModal;
