@@ -4,6 +4,7 @@ export default {
     siteName: 'No Frills eCommerce',
     customer: {},
     addresses: [],
+    payments: [],
     pageContent: {},
     errors: [],
     loginErrors: [],

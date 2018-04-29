@@ -83,6 +83,7 @@ export function submitLogin(userId) {
 
         dispatch(updatePageProps('customer', response.customer));
         dispatch(updatePageProps('addresses', response.customer.addresses));
+        dispatch(updatePageProps('payments', response.customer.payments));
         dispatch(updatePageProps('errors', response.pageData.errors));
         dispatch(updatePageProps('loginErrors', []));
         dispatch(updatePageProps('inputUsername', ''));
@@ -100,6 +101,7 @@ export function submitLogout() {
   return function (dispatch) {
     dispatch(updatePageProps('customer', {}));
     dispatch(updatePageProps('addresses', []));
+    dispatch(updatePageProps('payments', []));
     dispatch(updatePageProps('errors', {}));
     dispatch(updatePageProps('loginErrors', []));
     dispatch(updatePageProps('inputUsername', ''));
@@ -119,6 +121,7 @@ export function getHomepageData(userId) {
 
         dispatch(updatePageProps('customer', response.customer));
         dispatch(updatePageProps('addresses', response.customer.addresses));
+        dispatch(updatePageProps('payments', response.customer.payments));
         dispatch(updatePageProps('errors', response.pageData.errors));
         dispatch(updatePageProps('loginErrors', []));
         dispatch(updatePageProps('inputUsername', ''));
@@ -216,3 +219,47 @@ export function addToCart(cart, itemId, itemName, itemCost) {
   };
 }
 
+
+export function submitOrder(cart, userName, userId, addressId, paymentId) {
+  // debugger;
+
+  if (cart === undefined)
+    return updatePageProps('errors', ['The cart is invalid']);
+
+  if (userName === undefined || userName.length < 3)
+    return updatePageProps('errors', ['The userName must be valid']);
+
+  if (userId === undefined || userId < 0)
+    return updatePageProps('errors', ['The userId must be valid']);
+
+  if (addressId === undefined || addressId < 0)
+    return updatePageProps('errors', ['The addressId must be valid']);
+
+  if (paymentId === undefined || paymentId < 0)
+    return updatePageProps('errors', ['The paymentId must be valid']);
+
+  let orderObject = {
+    userName: userName,
+    userId: userId,
+    orderItems: cart,
+    addressId: addressId,
+    paymentId:paymentId
+  };
+
+  return function (dispatch) {
+    return noAuthPost(apiUrl + 'submit_order', orderObject)
+      .then((response) => {
+        // debugger;
+        if (response.errors != null)
+          return dispatch(updatePageProps('errors', response.errors));
+
+        dispatch(updatePageProps('cartTotal', 0));
+        dispatch(updatePageProps('cartItems', 0));
+        dispatch(updatePageProps('cart', []));
+        return dispatch(updatePageProps('pageContent', response.pageData));
+      })
+      .catch((/*error*/) => {
+        // console.log(error);
+      });
+  };
+}

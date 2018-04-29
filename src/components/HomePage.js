@@ -67,10 +67,21 @@ class HomePage extends React.Component {
           showModal={this.props.pageProps.showCart}
           showCancelButton={true}
           title={this.props.pageProps.siteName + ": Shopping Cart and Checkout"}
-          confirmAction={() => this.props.restCallActions.completeCheckout(this.props.pageProps.cart, this.props.pageProps.userName)}
+          confirmAction={() => this.props.restCallActions.submitOrder(
+            this.props.pageProps.cart,
+            this.props.pageProps.customer.userName,
+            this.props.pageProps.customer.customerId,
+            this.props.pageProps.customer.addresses[0].addressId,
+            this.props.pageProps.customer.payments[0].paymentId)}
           confirmText="Create Order"
           cancelText="Cancel"
           cancelAction={() => this.props.restCallActions.updatePageProps('showCart', false)}
+          clearText="Clear Cart"
+          clearAction={() => {
+            this.props.restCallActions.updatePageProps('cart', []);
+            this.props.restCallActions.updatePageProps('cartTotal', 0);
+            this.props.restCallActions.updatePageProps('cartItems', 0);}
+          }
           restCallActions={this.props.restCallActions}
           pageProps={this.props.pageProps}
         />

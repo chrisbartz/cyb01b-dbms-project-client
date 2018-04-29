@@ -66,10 +66,13 @@ const LoginModal = (props) => {
           }
         )}
         </h4>
-        {props.pageProps.inputUsername != undefined && props.pageProps.inputUsername.length > 0 ?
+        {props.pageProps.cartItems > 0 ?
           <button className="btn brand-blue-button" onClick={props.confirmAction}>{props.confirmText}</button>
         :
         <button disabled="disabled" className="btn brand-blue-button" onClick={props.confirmAction}>{props.confirmText}</button>
+        }
+        {
+          <button className="btn brand-gray-button" onClick={props.clearAction}>{props.clearText}</button>
         }
         {props.showCancelButton ?
           <button className="btn brand-gray-button" onClick={props.cancelAction}>{props.cancelText}</button>
