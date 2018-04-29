@@ -116,7 +116,9 @@ const OrdersModal = (props) => {
               );
             })
             :
-            null
+            <h4>
+              You have no order history
+            </h4>
         }
       </Modal.Body>
       <Modal.Footer>
