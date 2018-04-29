@@ -3,6 +3,7 @@ export default {
   pageProps:{
     siteName: 'No Frills eCommerce',
     customer: {},
+    orders:[],
     addresses: [],
     payments: [],
     pageContent: {},
@@ -14,6 +15,7 @@ export default {
     cart: [],
     showCart: false,
     cartTotal: 0,
-    cartItems: 0
+    cartItems: 0,
+    showOrders: false
   }
 };

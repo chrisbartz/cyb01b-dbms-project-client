@@ -8,6 +8,7 @@ import ToolBar from './ToolBar';
 import * as restCallActions from '../actions/restCallActions';
 import LoginModal from "./LoginModal";
 import CartModal from "./CartModal";
+import OrdersModal from "./OrdersModal";
 import HomePageItems from "./HomePageItems";
 
 // This is a class-based component because the current
@@ -24,8 +25,6 @@ class HomePage extends React.Component {
   }
 
   componentDidMount() {
-    // console.log('hello homepage');
-    // this.props.restCallActions.getTestDataFromApi();
   }
 
   submitLogin(userId) {
@@ -37,11 +36,7 @@ class HomePage extends React.Component {
   }
 
   render() {
-    // const activeStyle = { color: 'blue' };
     // debugger;
-    // console.log(this.props.pageProps.customer);
-    // console.log(this.props.pageProps.addresses);
-    // console.log(this.props.pageProps.pageProps);
     return (
       <div>
         <ToolBar className="set-width" restCallActions={this.props.restCallActions} pageProps={this.props.pageProps} />
@@ -82,6 +77,15 @@ class HomePage extends React.Component {
             this.props.restCallActions.updatePageProps('cartTotal', 0);
             this.props.restCallActions.updatePageProps('cartItems', 0);}
           }
+          restCallActions={this.props.restCallActions}
+          pageProps={this.props.pageProps}
+        />
+
+        <OrdersModal
+          showModal={this.props.pageProps.showOrders}
+          title={this.props.pageProps.siteName + ": Your Order History"}
+          confirmAction={() => this.props.restCallActions.updatePageProps('showOrders', false)}
+          confirmText="Dismiss"
           restCallActions={this.props.restCallActions}
           pageProps={this.props.pageProps}
         />

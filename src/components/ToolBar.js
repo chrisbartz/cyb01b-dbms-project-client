@@ -51,7 +51,7 @@ const ToolBar = (props) => {
                   ''
               }</MenuItem>
               <MenuItem divider/>
-              <MenuItem eventKey={8.8} onClick={() => props.restCallActions.submitLogout()}>My Orders</MenuItem>
+              <MenuItem eventKey={8.8} onClick={() => props.restCallActions.updatePageProps('showOrders', true)}>My Orders</MenuItem>
               <MenuItem eventKey={8.9} onClick={() => props.restCallActions.submitLogout()}>Log Out</MenuItem>
             </NavDropdown>
           </Nav>

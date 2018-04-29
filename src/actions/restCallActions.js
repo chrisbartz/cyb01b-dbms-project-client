@@ -82,6 +82,7 @@ export function submitLogin(userId) {
           return dispatch(updatePageProps('loginErrors', response.errors));
 
         dispatch(updatePageProps('customer', response.customer));
+        dispatch(updatePageProps('orders', response.orders));
         dispatch(updatePageProps('addresses', response.customer.addresses));
         dispatch(updatePageProps('payments', response.customer.payments));
         dispatch(updatePageProps('errors', response.pageData.errors));
@@ -100,6 +101,7 @@ export function submitLogin(userId) {
 export function submitLogout() {
   return function (dispatch) {
     dispatch(updatePageProps('customer', {}));
+    dispatch(updatePageProps('orders', []));
     dispatch(updatePageProps('addresses', []));
     dispatch(updatePageProps('payments', []));
     dispatch(updatePageProps('errors', {}));
@@ -120,6 +122,7 @@ export function getHomepageData(userId) {
           return dispatch(updatePageProps('loginErrors', response.errors));
 
         dispatch(updatePageProps('customer', response.customer));
+        dispatch(updatePageProps('orders', response.orders));
         dispatch(updatePageProps('addresses', response.customer.addresses));
         dispatch(updatePageProps('payments', response.customer.payments));
         dispatch(updatePageProps('errors', response.pageData.errors));
@@ -256,6 +259,7 @@ export function submitOrder(cart, userName, userId, addressId, paymentId) {
         dispatch(updatePageProps('cartTotal', 0));
         dispatch(updatePageProps('cartItems', 0));
         dispatch(updatePageProps('cart', []));
+        dispatch(updatePageProps('orders', response.orders));
         return dispatch(updatePageProps('pageContent', response.pageData));
       })
       .catch((/*error*/) => {
